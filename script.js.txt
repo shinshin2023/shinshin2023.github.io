@@ -1,0 +1,32 @@
+// script.js
+
+$(document).ready(function() {
+    const jobs = [
+        { title: 'Web Developer', company: 'Company A', location: 'Tokyo' },
+        { title: 'Data Scientist', company: 'Company B', location: 'Osaka' },
+        { title: 'Project Manager', company: 'Company C', location: 'Nagoya' },
+        // 他の求人データをここに追加
+    ];
+
+    $('#search-button').click(function() {
+        const keyword = $('#keyword').val().toLowerCase();
+        const filteredJobs = jobs.filter(job => 
+            job.title.toLowerCase().includes(keyword) ||
+            job.company.toLowerCase().includes(keyword) ||
+            job.location.toLowerCase().includes(keyword)
+        );
+
+        $('#results').empty();
+        if (filteredJobs.length > 0) {
+            filteredJobs.forEach(job => {
+                $('#results').append(`<div class="job">
+                    <h3>${job.title}</h3>
+                    <p>${job.company}</p>
+                    <p>${job.location}</p>
+                </div>`);
+            });
+        } else {
+            $('#results').append('<p>該当する求人が見つかりませんでした。</p>');
+        }
+    });
+});
